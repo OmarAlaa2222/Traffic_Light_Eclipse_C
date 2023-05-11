@@ -15,17 +15,19 @@
 #define NINE  0B10010000
 
  u8 i,j,x,z;
- u8 arr[10]={ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE,ZERO};
+ u8 arr[11]={ZERO,NINE,EIGHT,SEVEN,SIX,FIVE,FOUR,THREE,TWO,ONE,ZERO};
+ u8 arr1[4]={THREE,TWO,ONE,ZERO};
 void Segment (void){
-	for(i=0;i<10;i++){
+	for(i=0;i<11;i++){
 		PORTA=arr[i];
 		PORTD=ZERO;
 
-		if (i==9){
+		if (i==0){
 			PORTD=ONE;
 		}
 		_delay_ms(1000);
 	}
+
 }
 int main (void){
     DDRA=255;
@@ -43,8 +45,8 @@ int main (void){
 		for(j=0;j<3;j++){
 			if (j==1){
 				SET_BIT(PORTB,j);
-				for(x=0;x<=2;x++){
-					PORTA=arr[x];
+				for(x=0;x<=3;x++){
+					PORTA=arr1[x];
 					PORTD=ZERO;
 					_delay_ms(1000);
 
@@ -55,7 +57,6 @@ int main (void){
 			}
 			SET_BIT(PORTB,j);
 			Segment();
-			_delay_ms(1000);
 			CLEAR_BIT(PORTB,j);
 
 		}
